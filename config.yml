@@ -1,5 +1,6 @@
 app:
-  port: 4000
+  host: localhost
+  port: 50051
 mysql:
   host: localhost
   user : root

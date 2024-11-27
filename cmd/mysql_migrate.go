@@ -43,7 +43,7 @@ func processMigration(cmd *cobra.Command, args []string) {
 func migration(db *gorm.DB, direction string, step int) {
 	var (
 		n                  int
-		migrationDirection migrate.MigrationDirection = migrate.Up
+		migrationDirection = migrate.Up
 	)
 
 	migrations := &migrate.FileMigrationSource{

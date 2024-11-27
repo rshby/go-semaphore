@@ -30,6 +30,10 @@ func LoadConfig() {
 	}
 }
 
+func AppHost() string {
+	return viper.GetString("app.host")
+}
+
 func AppPort() int {
 	return viper.GetInt("app.port")
 }
@@ -71,7 +75,7 @@ func MysqlConnMaxLifetime() time.Duration {
 	duration, err := time.ParseDuration(maxLifetime)
 	if err != nil {
 		logrus.Error(err)
-		return time.Duration(1 * time.Hour)
+		return 1 * time.Hour
 	}
 
 	return duration
