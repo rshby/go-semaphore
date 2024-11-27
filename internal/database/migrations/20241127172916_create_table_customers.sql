@@ -1,0 +1,13 @@
+-- +migrate Up notransaction
+CREATE TABLE IF NOT EXISTS customers(
+    id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    first_name VARCHAR(255) NOT NULL ,
+    last_name VARCHAR(255),
+    email VARCHAR(255) NOT NULL UNIQUE ,
+    phone_number VARCHAR(15) UNIQUE ,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)ENGINE =InnoDB;
+
+-- +migrate Down
+DROP TABLE IF EXISTS customers;

@@ -1,0 +1,15 @@
+app:
+  port: 4000
+mysql:
+  host: localhost
+  user : root
+  password : root
+  port : 3306
+  name : semaphore
+  ssl_mode: "disable"
+  timezone: "UTC"
+  max_idle_conns: 50
+  max_open_conns: 100
+  conn_max_lifetime: "1h"
+  ping_interval: "5000ms"
+  retry_attempts: 3
