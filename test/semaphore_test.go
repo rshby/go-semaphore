@@ -39,27 +39,22 @@ func TestSemaphore(t *testing.T) {
 		ctx            = context.Background()
 	)
 
-	wg.Add(1)
-	go func(wg *sync.WaitGroup) {
-		defer wg.Done()
-
-		for i := 0; i < 10; i++ {
-			if err := semLimit.Acquire(ctx, 1); err != nil {
-				continue
-			}
-
-			wg.Add(1)
-			go func(wg *sync.WaitGroup, semLimit *semaphore.Weighted) {
-				defer func() {
-					semLimit.Release(1)
-					wg.Done()
-				}()
-
-				time.Sleep(1 * time.Second)
-				fmt.Println("print inside a goroutine")
-			}(wg, semLimit)
+	for i := 0; i < 10; i++ {
+		if err := semLimit.Acquire(ctx, 1); err != nil {
+			continue
 		}
-	}(wg)
+
+		wg.Add(1)
+		go func(wg *sync.WaitGroup, semLimit *semaphore.Weighted) {
+			defer func() {
+				semLimit.Release(1)
+				wg.Done()
+			}()
+
+			time.Sleep(1 * time.Second)
+			fmt.Println("print inside a goroutine")
+		}(wg, semLimit)
+	}
 
 	wg.Wait()
 }
